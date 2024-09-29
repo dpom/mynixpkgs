@@ -1,0 +1,36 @@
+* cljproj
+
+My nix packages and templates
+
+** Usage
+
+*** Use a package
+
+Use of the =cljstyle= package
+#+begin_src shell
+nix shell git+https://github.com/dpom/mynixpkgs#cljstyle
+cljstyle --help
+#+end_src
+
+*** Use a template
+
+Use of the =cljproj= template:
+#+begin_src shell
+nix flake init -t git+https://github.com/dpom/mynixpkgs#cljproj
+#+end_src
+
+*** Import this flake in another flake
+
+See the ~flake.nix~ of the =cljproj= template.
+
+** Resources
+
+1. https://gitlab.inria.fr/x-QGuill/mypkgs_example 
+
+** Tasks
+
+
+** License
+
+Copyright © 2024 Dan Pomohaci
+
