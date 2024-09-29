@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
   };
   buildInputs = [ unzip ];
   unpackPhase = ''
-  unzip ${src} -d .
+    unzip ${src} -d .
     '';
   dontConfigure = true;
   dontBuild = true;
@@ -20,6 +20,6 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     cp ./cljstyle $out/bin
     chmod a+x $out/bin/cljstyle
-   '';
+    '';
   
 }
