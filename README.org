@@ -23,9 +23,10 @@ nix flake init -t git+https://github.com/dpom/mynixpkgs#cljproj
 
 See the ~flake.nix~ of the =cljproj= template.
 
-** Resources
+** References
 
-1. https://gitlab.inria.fr/x-QGuill/mypkgs_example 
+1. https://github.com/NixOS/nixpkgs
+2. https://gitlab.inria.fr/x-QGuill/mypkgs_example 
 
 ** Tasks
 

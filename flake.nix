@@ -13,6 +13,7 @@
   {
     packages.${system} = rec {
       cljstyle = pkgs.callPackage ./pkgs/cljstyle { };
+      rmview = pkgs.callPackage ./pkgs/rmview { };
     };
     templates = import ./templates/templates.nix;
   };
