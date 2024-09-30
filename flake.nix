@@ -13,6 +13,7 @@
   {
     packages.${system} = rec {
       cljstyle = pkgs.callPackage ./pkgs/cljstyle { };
+      dbeaver = pkgs.callPackage ./pkgs/dbeaver { };
       rmview = pkgs.callPackage ./pkgs/rmview { };
     };
     templates = import ./templates/templates.nix;
