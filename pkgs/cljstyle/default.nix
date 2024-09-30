@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, unzip }:
+{ lib, stdenv, fetchurl, unzip }:
 let
   name = "cljstyle";
   version = "0.16.626";
@@ -21,5 +21,12 @@ stdenv.mkDerivation rec {
     cp ./cljstyle $out/bin
     chmod a+x $out/bin/cljstyle
     '';
+
+  meta = with lib; {
+    description = "A tool for formatting Clojure code";
+    mainProgram = "cljstyle";
+    homepage = "https://github.com/greglook/cljstyle";
+    license = licenses.epl10;
+  };
   
 }
