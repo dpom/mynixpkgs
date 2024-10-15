@@ -17,13 +17,13 @@
 
 (task 'format '() "format code" '(lambda (&optional x) "bb format"))
 
-(task 'kibit '() "lint with kibit" '(lambda (&optional x) "bb kibit"))
-
 (task 'kondo '() "lint with kondo" '(lambda (&optional x) "bb kondo"))
 
 (task 'libupdate '() "search for new libs versions" '(lambda (&optional x) "bb libupdate" ))
 
 (task 'tests '() "run tests" '(lambda (&optional x) "bb test"))
+
+(task 'readme '() "build readme file" '(lambda (&optional x) "pandoc -o README.md tmp/README.org"))
 
 (provide '.ent)
 ;;; .ent.el ends here
