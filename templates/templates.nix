@@ -6,6 +6,13 @@ rec {
     '';
   };
 
+  pyproj = {
+    path = ./pyproj;
+    description = ''
+      A template for python project
+    '';
+  };
+  
   flake = {
     path = ./flake;
     description = ''
