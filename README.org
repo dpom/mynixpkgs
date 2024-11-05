@@ -1,4 +1,4 @@
-* cljproj
+* mynixpkgs
 
 My nix packages and templates
 
@@ -6,7 +6,7 @@ My nix packages and templates
 
 *** Use a package
 
-Use of the =cljstyle= package
+Example: use of the =cljstyle= package
 #+begin_src shell
 nix shell git+https://github.com/dpom/mynixpkgs#cljstyle
 cljstyle --help
@@ -14,7 +14,7 @@ cljstyle --help
 
 *** Use a template
 
-Use of the =cljproj= template:
+Example: use of the =cljproj= template:
 #+begin_src shell
 nix flake init -t git+https://github.com/dpom/mynixpkgs#cljproj
 #+end_src
@@ -33,5 +33,4 @@ See the ~flake.nix~ of the =cljproj= template.
 
 ** License
 
-Copyright © 2024 Dan Pomohaci
-
+mynixpkgs is released under the GNU General Public License. See the [[file:LICENSE][file]] for details.
