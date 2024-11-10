@@ -13,7 +13,12 @@
   outputs = inputs @ { self, nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+          };
+        };
         poetry2nix = inputs.poetry2nix.lib.mkPoetry2Nix { inherit pkgs; };
       in
         {
@@ -24,13 +29,15 @@
               # set this to true to use premade wheels rather than the source
               preferWheels = true;
 
-              # this enables interactive plotting support with GTK
+              # example of overrides: this enables interactive plotting support with GTK
               overrides = poetry2nix.overrides.withDefaults (final: prev: {
                 matplotlib = with pkgs; prev.matplotlib.overridePythonAttrs 
                   {
                     passthru.args.enableGtk3 = true;
                   };
               });
+              propagatedBuildInputs = with pkgs; [
+              ];
             };
             default = self.packages.${system}.yourPackage;
           };
@@ -44,8 +51,6 @@
             inputsFrom = [self.packages.${system}.yourPackage];
             package = with pkgs; [
               # any development dependencies that you might have in nixpkgs
-              ruff
-              pyright
             ];
           };
 

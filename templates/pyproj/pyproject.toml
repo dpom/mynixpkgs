@@ -10,13 +10,13 @@ packages = [{include = "pyproj"}]
 python = "^3.12"
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.4.2"
-flake8 = "^6.1.0"
-ipython = "*"
+flake8 = "^7.1.1"
+ipython = "^8.29.0"
 mypy = "^1.5.1"
 pre-commit = "^3.3.3"
 pytest = "^8.3.2"
 python-lsp-server= "^1.12.0"
+ruff = "^0.7.3"
 
 [build-system]
 requires = ["poetry-core"]
