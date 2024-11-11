@@ -1,11 +1,13 @@
 {
   lib,
-  trivialBuild,
+  melpaBuild,
   fetchFromGitHub,
+  writeText
 }:
-trivialBuild {
+melpaBuild {
   pname = "combobulate";
-  version = "0.1";
+  ename = "combobulate";
+  version = "20241110.1947";
   src = fetchFromGitHub {
     owner = "mickeynp";
     repo = "combobulate";
@@ -15,6 +17,10 @@ trivialBuild {
   # elisp dependencies
   # packageRequires = [
   # ];
+
+  recipe = writeText "recipe" ''
+    (combobulate :repo "mickeynp/combobulate" :fetcher github)
+  '';
 
   meta = with lib; {
     description = "Combobulate is a package that adds structured editing and movement to a wide range of programming languages";
