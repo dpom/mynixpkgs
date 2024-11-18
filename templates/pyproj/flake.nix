@@ -1,65 +1,56 @@
 {
   description = "Template for python projects";
-
   inputs = {
+    devenv-root = {
+      url = "file+file:///dev/null";
+      flake = false;
+    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    poetry2nix = {
-      url = "github:nix-community/poetry2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+    devenv.url = "github:cachix/devenv";
+    nixpkgs-python = {
+      url = "github:cachix/nixpkgs-python";
+      inputs = { nixpkgs.follows = "nixpkgs"; };
     };
   };
-  outputs = inputs @ { flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs;}
-      {
-        debug = true;
-        systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-        perSystem = { config, self', inputs', pkgs, system, ... }:
-          let
-            poetry2nix = inputs.poetry2nix.lib.mkPoetry2Nix { inherit pkgs; };
-          in
-            {
-              packages = {
-                pyproj = poetry2nix.mkPoetryApplication {
-                  projectDir = ./.;
 
-                  # set this to true to use premade wheels rather than the source
-                  preferWheels = true;
+  outputs = inputs@{ flake-parts, nixpkgs, devenv-root, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.devenv.flakeModule
+      ];
+      systems = nixpkgs.lib.systems.flakeExposed;
 
-                  # example of overrides: this enables interactive plotting support with GTK
-                  overrides = poetry2nix.overrides.withDefaults (final: prev: {
-                    matplotlib = with pkgs; prev.matplotlib.overridePythonAttrs 
-                      {
-                        passthru.args.enableGtk3 = true;
-                      };
-                  });
-                  propagatedBuildInputs = with pkgs; [
-                  ];
-                };
-                default = config.packages.pyproj;
-              };
+      perSystem = { config, self', inputs', pkgs, system, ... }: {
+        # Per-system attributes can be defined here. The self' and inputs'
+        # module parameters provide easy access to attributes of the same
+        # system.
 
-              # Shell for app dependencies.
-              #
-              # nix develop
-              #
-              # Use this shell for developing your app.
-              devShells.default = pkgs.mkShell {
-                inputsFrom = [config.packages.pyproj];
-                package = with pkgs; [
-                  poetry
-                  # any development dependencies that you might have in nixpkgs
-                ];
-              };
+        # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
+        packages.default = pkgs.hello;
 
-              # Shell for poetry.
-              #
-              # nix develop .#poetry
-              #
-              # Use this shell for changes to pyproject.toml and poetry.lock.
-              devShells.poetry = pkgs.mkShell {
-                packages = [pkgs.poetry];
-              };
+        devenv.shells.default = {
+          # https://devenv.sh/reference/options/
+          packages = [ config.packages.default ];
+          # dotenv.enable = true;
+          languages.python = {
+            enable = true;
+            version = "3.12";
+            poetry = {
+              enable = true;
+              activate.enable = true;
+              install.enable = true;
+              install.quiet = false;
+              install.compile = true;
             };
+          };
+
+          # enterShell = ''
+          #   hello
+          # '';
+        };
       };
+    };
 }
+
+ 
