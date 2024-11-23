@@ -15,8 +15,21 @@ ipython = "^8.29.0"
 mypy = "^1.5.1"
 pre-commit = "^3.3.3"
 pytest = "^8.3.2"
-python-lsp-server= "^1.12.0"
+python-lsp-server= {extras = ["all"], version = "^1.12.0"}
 ruff = "^0.7.3"
+semgrep = "^1.97.0"
+
+[tool.black]
+skip-string-normalization = true
+line-length = 120
+
+[tool.flake8]
+ignore = "E501"
+max-line-length = 120 
+
+[tool.ruff.lint]
+ignore = ["E501"]
+
 
 [build-system]
 requires = ["poetry-core"]

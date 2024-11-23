@@ -10,7 +10,7 @@
     devenv.url = "github:cachix/devenv";
     nixpkgs-python = {
       url = "github:cachix/nixpkgs-python";
-      inputs = { nixpkgs.follows = "nixpkgs"; };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -20,18 +20,20 @@
         inputs.devenv.flakeModule
       ];
       systems = nixpkgs.lib.systems.flakeExposed;
-
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         # Per-system attributes can be defined here. The self' and inputs'
         # module parameters provide easy access to attributes of the same
         # system.
 
         # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
-        packages.default = pkgs.hello;
+        # packages.default = pkgs.hello;
 
         devenv.shells.default = {
           # https://devenv.sh/reference/options/
-          packages = [ config.packages.default ];
+          packages = [
+            # config.packages.default
+            pkgs.stdenv.cc.cc
+          ];
           # dotenv.enable = true;
           languages.python = {
             enable = true;
@@ -44,7 +46,9 @@
               install.compile = true;
             };
           };
-
+          env = {
+            LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+          };
           # enterShell = ''
           #   hello
           # '';
