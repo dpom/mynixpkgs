@@ -18,11 +18,11 @@
         #     # inherit (pkgs) fetchFromGitHub;
         #     # inherit (epkgs) melpaBuild;
         #   })]);
-        etrans = pkgs.emacsWithPackages(epkgs: [
-          (epkgs.callPackage ./pkgs/etrans {
-            inherit (pkgs) fetchFromGitHub;
-            inherit (epkgs) trivialBuild request;
-          })]); 
+        etrans = pkgs.callPackage ./pkgs/etrans {
+          inherit (pkgs) fetchFromGitHub;
+          trivialBuild = pkgs.emacs.pkgs.trivialBuild;
+          request = pkgs.emacsPackages.request;
+        }; 
       };
     };
     flake = {
