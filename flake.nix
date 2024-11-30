@@ -13,16 +13,20 @@
         cljstyle = pkgs.callPackage ./pkgs/cljstyle { };
         dbeaver = pkgs.callPackage ./pkgs/dbeaver { };
         rmview = pkgs.callPackage ./pkgs/rmview { };
-        # combobulate = pkgs.emacsWithPackages(epkgs: [
-        #   (epkgs.callPackage ./pkgs/combobulate {
-        #     # inherit (pkgs) fetchFromGitHub;
-        #     # inherit (epkgs) melpaBuild;
-        #   })]);
+        combobulate = pkgs.callPackage ./pkgs/combobulate {
+          inherit (pkgs) fetchFromGitHub;
+          trivialBuild = pkgs.emacs.pkgs.trivialBuild;
+        };
         etrans = pkgs.callPackage ./pkgs/etrans {
           inherit (pkgs) fetchFromGitHub;
           trivialBuild = pkgs.emacs.pkgs.trivialBuild;
           request = pkgs.emacsPackages.request;
-        }; 
+        };
+        ent = pkgs.callPackage ./pkgs/ent {
+          inherit (pkgs) fetchFromGitHub;
+          trivialBuild = pkgs.emacs.pkgs.trivialBuild;
+          seq = pkgs.emacsPackages.seq;
+        };
       };
     };
     flake = {

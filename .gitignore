@@ -1,6 +1,5 @@
-**/result/
-tmp/
-.direnv/
+**/result
+tmp
+.direnv
 *~
-/.stfolder/
-/result
+/.stfolder
