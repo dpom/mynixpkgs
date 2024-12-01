@@ -1,6 +1,7 @@
 {
   lib,
   trivialBuild,
+  dash,
   seq,
   fetchFromGitHub
 }:
@@ -11,11 +12,12 @@ trivialBuild rec {
     owner = "dpom";
     repo = "ent";
     rev = version;
-    hash = "sha256-ZX7F09s8lefhA07BJPz2aSxpsHIuuM1ZzX2qMWxsaDo=";
+    hash = "sha256-VaqZoCfx38bOhIbihTxV8/z6SH//WW+QQeIECIilDX4=";
   };
 
   # elisp dependencies
   propagatedUserEnvPkgs = [
+    dash
     seq
   ];
   buildInputs = propagatedUserEnvPkgs;
