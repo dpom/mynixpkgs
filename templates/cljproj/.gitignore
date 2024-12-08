@@ -21,4 +21,4 @@
 /checkouts
 /classes
 /target
-/tmp/
+#/tmp/

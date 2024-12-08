@@ -1,7 +1,22 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.direnv
+
+# Misc files
 *~
-.direnv/
-.lsp/.cache
-.project
-.settings
-/target
-/tmp/
+*.tex
+#tmp
+uv.lock
+#.ent.el
+#Notebook.org
+/.envrc.local
+flake.lock
+/log/*.log
