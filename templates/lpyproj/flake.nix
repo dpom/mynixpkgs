@@ -30,6 +30,7 @@
       uv2nix,
       pyproject-nix,
       pyproject-build-systems,
+      mynixpkgs,
       ...
     }:
     let
@@ -63,7 +64,8 @@
 
       # This example is only using x86_64-linux
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
+      mypkgs = mynixpkgs.packages.x86_64-linux;
+      
       # Use Python 3.12 from nixpkgs
       python = pkgs.python312;
 
@@ -96,9 +98,11 @@
           # This devShell simply adds Python and undoes the dependency leakage done by Nixpkgs Python infrastructure.
           default= pkgs.mkShell {
             packages = [
-              python
+              mypkgs.cljstyle
               pkgs.babashka
+              pkgs.clj-kondo
               pkgs.uv
+              python
             ];
             shellHook = ''
             unset PYTHONPATH

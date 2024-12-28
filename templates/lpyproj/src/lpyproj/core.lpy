@@ -5,9 +5,9 @@
     [os :as os]
     [datetime :as dt]))
 
+
 (defn hello
   []
   (let [now (dt.datetime/now)]
     (println "Hello world!")
     (println (.strftime now "%Y-%m-%d"))))
-
