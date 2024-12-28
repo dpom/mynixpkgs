@@ -94,60 +94,63 @@
         devShells.x86_64-linux = {
           # It is of course perfectly OK to keep using an impure virtualenv workflow and only use uv2nix to build packages.
           # This devShell simply adds Python and undoes the dependency leakage done by Nixpkgs Python infrastructure.
-          # impure = pkgs.mkShell {
-          #   packages = [
-          #     python
-          #     pkgs.uv
-          #   ];
-          #   shellHook = ''
-          #   unset PYTHONPATH
-          #   export UV_PYTHON_DOWNLOADS=never
-          # '';
-          # };
+          default= pkgs.mkShell {
+            packages = [
+              python
+              pkgs.babashka
+              pkgs.uv
+            ];
+            shellHook = ''
+            unset PYTHONPATH
+            export UV_PYTHON_DOWNLOADS=never
+            uv sync
+            source .venv/bin/activate
+          '';
+          };
 
           # This devShell uses uv2nix to construct a virtual environment purely from Nix, using the same dependency specification as the application.
           # The notable difference is that we also apply another overlay here enabling editable mode ( https://setuptools.pypa.io/en/latest/userguide/development_mode.html ).
           #
           # This means that any changes done to your local files do not require a rebuild.
-          default =
-            let
-              # Create an overlay enabling editable mode for all local dependencies.
-              editableOverlay = workspace.mkEditablePyprojectOverlay {
-                # Use environment variable
-                root = "$REPO_ROOT";
-                # Optional: Only enable editable for these packages
-                # members = [ "plyproj" ];
-              };
+          # default =
+          #   let
+          #     # Create an overlay enabling editable mode for all local dependencies.
+          #     editableOverlay = workspace.mkEditablePyprojectOverlay {
+          #       # Use environment variable
+          #       root = "$REPO_ROOT";
+          #       # Optional: Only enable editable for these packages
+          #       # members = [ "plyproj" ];
+          #     };
 
-              # Override previous set with our overrideable overlay.
-              editablePythonSet = pythonSet.overrideScope editableOverlay;
+          #     # Override previous set with our overrideable overlay.
+          #     editablePythonSet = pythonSet.overrideScope editableOverlay;
 
-              # Build virtual environment, with local packages being editable.
-              #
-              # Enable all optional dependencies for development.
-              virtualenv = editablePythonSet.mkVirtualEnv "lpyproj-dev-env" workspace.deps.all;
+          #     # Build virtual environment, with local packages being editable.
+          #     #
+          #     # Enable all optional dependencies for development.
+          #     virtualenv = editablePythonSet.mkVirtualEnv "lpyproj-dev-env" workspace.deps.all;
 
-            in
-              pkgs.mkShell {
-                packages = [
-                  virtualenv
-                  pkgs.babashka
-                  pkgs.uv
-                ];
-                shellHook = ''
-              # Undo dependency propagation by nixpkgs.
-              unset PYTHONPATH
+          #   in
+          #     pkgs.mkShell {
+          #       packages = [
+          #         virtualenv
+          #         pkgs.babashka
+          #         pkgs.uv
+          #       ];
+          #       shellHook = ''
+          #     # Undo dependency propagation by nixpkgs.
+          #     unset PYTHONPATH
 
-              # Don't create venv using uv
-              export UV_NO_SYNC=1
+          #     # Don't create venv using uv
+          #     export UV_NO_SYNC=1
 
-              # Prevent uv from downloading managed Python's
-              export UV_PYTHON_DOWNLOADS=never
+          #     # Prevent uv from downloading managed Python's
+          #     export UV_PYTHON_DOWNLOADS=never
 
-              # Get repository root using git. This is expanded at runtime by the editable `.pth` machinery.
-              export REPO_ROOT=$(git rev-parse --show-toplevel)
-            '';
-              };
+          #     # Get repository root using git. This is expanded at runtime by the editable `.pth` machinery.
+          #     export REPO_ROOT=$(git rev-parse --show-toplevel)
+          #   '';
+          # };
         };
       };
 }

@@ -1,6 +1,12 @@
 version = 1
 requires-python = ">=3.12"
 
+[manifest]
+members = [
+    "example-pkg",
+    "lpyproj",
+]
+
 [[package]]
 name = "attrs"
 version = "24.3.0"
@@ -27,6 +33,11 @@ wheels = [
 ]
 
 [[package]]
+name = "example-pkg"
+version = "0.1.0"
+source = { editable = "tmp/example-pkg" }
+
+[[package]]
 name = "immutables"
 version = "0.21"
 source = { registry = "https://pypi.org/simple" }
@@ -51,7 +62,7 @@ wheels = [
 ]
 
 [[package]]
-name = "plyproject"
+name = "lpyproj"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
