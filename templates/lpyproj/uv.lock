@@ -1,12 +1,6 @@
 version = 1
 requires-python = ">=3.12"
 
-[manifest]
-members = [
-    "example-pkg",
-    "lpyproj",
-]
-
 [[package]]
 name = "attrs"
 version = "24.3.0"
@@ -31,11 +25,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/0e/1a/0d2573d1ecfcdbf12
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a3/d7/ea4384983f51d54d21fa4936b37d02e9196b187b78bea7d620353a718e66/basilisp-0.3.5-py3-none-any.whl", hash = "sha256:089d673bca3ded066419727ce3bbc40410dd194451792655a7431680a7927d3a", size = 295679 },
 ]
-
-[[package]]
-name = "example-pkg"
-version = "0.1.0"
-source = { editable = "tmp/example-pkg" }
 
 [[package]]
 name = "immutables"

@@ -12,6 +12,13 @@
       A template for python project
     '';
   };
+
+  lpyproj = {
+    path = ./lpyproj;
+    description = ''
+      A template for basilisp project
+    '';
+  };
   
   default = {
     path = ./flake;

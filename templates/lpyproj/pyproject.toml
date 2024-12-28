@@ -18,9 +18,6 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/lpyproj"]
 
-[tool.uv.workspace]
-members = ["tmp/example-pkg"]
-
 [dependency-groups]
 dev = [
     "ruff>=0.6.7",
