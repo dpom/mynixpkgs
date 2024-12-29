@@ -1,10 +1,12 @@
-* Description
+* lpyproj
 
-** Archtecture
+** Description
 
-* Getting Started
+*** Archtecture
 
-** Linux, MacOS, and Windows (WSL2)
+** Getting Started
+
+*** Linux, MacOS, and Windows (WSL2)
 
 1. Install
    - direnv
@@ -16,11 +18,14 @@ direnv allow
    #+end_src
    first time it will be a long process to download all packages and libraries.
 
-** Windows (non WSL2)
+*** Windows (non WSL2)
 
 1. Install
    - python 3.12+
    - uv (https://docs.astral.sh/uv/getting-started/installation/)
+   - babashka
+   - cljstyle
+   - kondo 
 2. Create manually the user variables defined in  ~.envrc.local.example~.
 3. In the project folder run:
    #+begin_src shell
@@ -28,29 +33,22 @@ uv venv
 uv sync
    #+end_src
 
-* Build and Test
+** Development
 
-Comman to run ~scheduler~:
+To format the code run:
 #+begin_src shell
-uv run fastapi dev knowledge_insights/dispacher.py
+bb format
 #+end_src
-   
-* Contribute
+
+To lint the code run:
+#+begin_src shell
+bb kondo
+#+end_src
 
 To make sure that no unformatted commits with lint errors end up in the main branch run initially:
 #+begin_src shell
 	git config core.hooksPath hooks
 #+end_src
-Scriptul ~pre-push~ will block the push if there are style or lint errors in code.
-
-To format the code run:
-#+begin_src shell
-uv run ruff format
-#+end_src
-
-To lint the code run:
-#+begin_src shell
-uv run ruff check
-#+end_src
+The ~pre-push~ script will block the push if there are style or lint errors in code.
 
   

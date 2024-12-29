@@ -1,5 +1,5 @@
 #+TITLE: Notebook
-#+DESCRIPTION: notebook for pyproj project
+#+DESCRIPTION: notebook for lpyproj project
 #+AUTHOR: Dan Pomohaci
 #+EMAIL: dan.pomohaci@gmail.com
 #+STARTUP: overview indent align inlineimages
