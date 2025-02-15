@@ -47,9 +47,7 @@
                              :verbose   false
                              :upgrade   false
                              :force     false}}
-  :neil     {:project {:name    cljproj 
-                       :version "0.1"}}
-  ;; added by neil
-  :build    {:deps       {io.github.clojure/tools.build {:git/tag "v0.10.6" :git/sha "52cf7d6"}
-                          slipset/deps-deploy           {:mvn/version "0.2.2"}}
-             :ns-default build}}}
+  :slim     {:deps       {io.github.abogoyavlensky/slim {:mvn/version "LATEST"}}
+             :ns-default slim.app
+             :exec-args  {:main-ns cljproj.main}}
+  }}
