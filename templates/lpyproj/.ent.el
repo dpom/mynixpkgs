@@ -7,21 +7,17 @@
 ;; project settings
 (setq ent-project-home (file-name-directory (if load-file-name load-file-name buffer-file-name)))
 (setq ent-project-name "lpyproj")
-(setq ent-clean-regexp "~$\\|\\.tex$")
+(setq ent-clean-regexp "~$")
 
-(require 'ent)
+(task :style '() "check code" "bb style")
 
-(ent-tasks-init)
+(task :format '() "format code" "bb format")
 
-(task 'style '() "check code" '(lambda (&optional x) "bb style"))
+(task :kondo '() "lint with kondo" "bb kondo")
 
-(task 'format '() "format code" '(lambda (&optional x) "bb format"))
+(task :tests '() "run tests" "bb test")
 
-(task 'kondo '() "lint with kondo" '(lambda (&optional x) "bb kondo"))
-
-(task 'tests '() "run tests" '(lambda (&optional x) "bb test"))
-
-(task 'readme '() "build readme file" '(lambda (&optional x) "pandoc -o README.md tmp/README.org"))
+(task :readme '() "build readme file" "pandoc -o README.md tmp/README.org")
 
 (provide '.ent)
 ;;; .ent.el ends here

@@ -6,20 +6,16 @@
 
 ;; project settings
 (setq ent-project-home (file-name-directory (if load-file-name load-file-name buffer-file-name)))
-(setq ent-project-name "knowledge-insights")
-(setq ent-clean-regexp "~$\\|\\.tex$")
+(setq ent-project-name "pyproject")
+(setq ent-clean-regexp "~$")
 
-(require 'ent)
+(task :check '() "check code format" "ruff format --check")
 
-(ent-tasks-init)
+(task :format '() "format code" "ruff format")
 
-(task 'check '() "check code format" '(lambda (&optional x) "ruff format --check"))
+(task :lint '() "lint code" "ruff check")
 
-(task 'format '() "format code" '(lambda (&optional x) "ruff format"))
-
-(task 'lint '() "lint code" '(lambda (&optional x) "ruff check"))
-
-(task 'readme '() "build readme file" '(lambda (&optional x) "pandoc -o README.md tmp/README.org"))
+(task :readme '() "build readme file" "pandoc -o README.md tmp/README.org")
 
 (provide '.ent)
 ;;; .ent.el ends here

@@ -2,7 +2,7 @@
   description = "main flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
@@ -16,16 +16,6 @@
         combobulate = pkgs.callPackage ./pkgs/combobulate {
           inherit (pkgs) fetchFromGitHub;
           trivialBuild = pkgs.emacs.pkgs.trivialBuild;
-        };
-        etrans = pkgs.callPackage ./pkgs/etrans {
-          inherit (pkgs) fetchFromGitHub;
-          trivialBuild = pkgs.emacs.pkgs.trivialBuild;
-          request = pkgs.emacsPackages.request;
-        };
-        ent = pkgs.callPackage ./pkgs/ent {
-          inherit (pkgs) fetchFromGitHub;
-          trivialBuild = pkgs.emacs.pkgs.trivialBuild;
-          seq = pkgs.emacsPackages.seq;
         };
       };
     };
