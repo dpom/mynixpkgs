@@ -14,6 +14,11 @@
         dbeaver = pkgs.callPackage ./pkgs/dbeaver { };
         rmview = pkgs.callPackage ./pkgs/rmview { };
         aws2-wrap = pkgs.callPackage ./pkgs/aws2-wrap { };
+        aws-vpn-client = pkgs.callPackage ./pkgs/aws-vpn-client {
+          openvpn = pkgs.callPackage ./pkgs/aws-vpn-client/openvpn.nix {
+            inherit (pkgs) openvpn;
+          };
+        };
         combobulate = pkgs.callPackage ./pkgs/combobulate {
           inherit (pkgs) fetchFromGitHub;
           trivialBuild = pkgs.emacs.pkgs.trivialBuild;

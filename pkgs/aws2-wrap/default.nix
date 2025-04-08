@@ -2,7 +2,7 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "aws2-wrap";
-  version = "1.0";
+  version = "1.4.0";
   pyproject = true;
 
   src = fetchFromGitHub {
