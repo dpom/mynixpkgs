@@ -22,7 +22,7 @@
                   pkgs.clj-kondo
                   pkgs.clojure
                   pkgs.dbeaver-bin
-                  pkgs.jdk22
+                  pkgs.jdk
                   mypkgs.cljstyle
                   pkgs.pandoc
                 ];

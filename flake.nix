@@ -13,6 +13,7 @@
         cljstyle = pkgs.callPackage ./pkgs/cljstyle { };
         dbeaver = pkgs.callPackage ./pkgs/dbeaver { };
         rmview = pkgs.callPackage ./pkgs/rmview { };
+        aws2-wrap = pkgs.callPackage ./pkgs/aws2-wrap { };
         combobulate = pkgs.callPackage ./pkgs/combobulate {
           inherit (pkgs) fetchFromGitHub;
           trivialBuild = pkgs.emacs.pkgs.trivialBuild;
