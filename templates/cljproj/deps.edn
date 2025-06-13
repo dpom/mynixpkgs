@@ -7,15 +7,14 @@
         com.taoensso/timbre       {:mvn/version "6.6.1"}
         integrant/integrant       {:mvn/version "0.13.1"}
         metosin/malli             {:mvn/version "0.17.0"}
-        org.slf4j/slf4j-api       {:mvn/version "2.0.16"}
-        }
+        org.slf4j/slf4j-api       {:mvn/version "2.0.16"}}
 
  :aliases
  {:dev      {:extra-paths ["dev/src" "dev/resources"]
              :extra-deps  {integrant/repl      {:mvn/version "0.4.0"}
-                           criterium/criterium {:mvn/version "0.4.6"}}} 
+                           criterium/criterium {:mvn/version "0.4.6"}}}
   :nrepl    {:extra-deps
-             {cider/cider-nrepl             {:mvn/version "0.52.0"}
+             {cider/cider-nrepl             {:mvn/version "0.56.0"}
               refactor-nrepl/refactor-nrepl {:mvn/version "3.10.0"}
               org.clojure/tools.deps.alpha  {:git/url "https://github.com/clojure/tools.deps.alpha"
                                              :sha     "5b8909bdb072d66c9f643bae50cd2878a0f694c2"}
@@ -35,6 +34,9 @@
              :exec-fn     kaocha.runner/exec-fn
              :exec-args   {:randomize? true
                            :fail-fast? false}}
+  :cljfmt {:deps       {io.github.weavejester/cljfmt {:git/tag "0.13.1" :git/sha "7de286008766127128a156275b9add3bf443d7e5"}}
+           :ns-default cljfmt.tool
+           :main-opts  ["-m" "cljfmt.main" "check"]}
   :outdated {:replace-paths ["."]
              :replace-deps
              {com.github.liquidz/antq {:mvn/version "RELEASE"}
@@ -49,5 +51,4 @@
                              :force     false}}
   :slim     {:deps       {io.github.abogoyavlensky/slim {:mvn/version "LATEST"}}
              :ns-default slim.app
-             :exec-args  {:main-ns cljproj.main}}
-  }}
+             :exec-args  {:main-ns cljproj.main}}}}

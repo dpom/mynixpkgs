@@ -8,18 +8,32 @@
                                  (if (empty? src-file)
                                    "src test"
                                    src-file))))}
-  style     {:doc  "Checks code style on default or specific file"
-             :task (let [[src-file] *command-line-args*]
-                     (shell (str "cljstyle check "
-                                 (if (empty? src-file)
-                                   "src test resources"
-                                   src-file))))}
-  format    {:doc  "Formats codebase on default or specific file"
-             :task (let [[src-file] *command-line-args*]
-                     (shell  (str "cljstyle fix "
+  ;; cljstyle
+  ;; style     {:doc  "Checks code style on default or specific file"
+  ;;            :task (let [[src-file] *command-line-args*]
+  ;;                    (shell (str "cljstyle check "
+  ;;                                (if (empty? src-file)
+  ;;                                  "src test resources"
+  ;;                                  src-file))))}
+  ;; format    {:doc  "Formats codebase on default or specific file"
+  ;;            :task (let [[src-file] *command-line-args*]
+  ;;                    (shell  (str "cljstyle fix "
+  ;;                                 (if (empty? src-file)
+  ;;                                   "src test resources"
+  ;;                                   src-file))))}
+  ;; cljfmt
+  style      {:doc  "Checks code style on default or specific file"
+              :task (let [[src-file] *command-line-args*]
+                      (shell (str "cljfmt check "
                                   (if (empty? src-file)
                                     "src test resources"
                                     src-file))))}
+  format     {:doc  "Formats codebase on default or specific file"
+              :task (let [[src-file] *command-line-args*]
+                      (shell  (str "cljfmt fix "
+                                   (if (empty? src-file)
+                                     "src test resources"
+                                     src-file))))}
   test      {:doc  "Runs tests (using kaocha)"
              :task (let [[tst-ns] *command-line-args*]
                      (clojure (str "-M:test"
@@ -27,5 +41,4 @@
   libupdate {:doc  "Check for newer libraries"
              :task (clojure "-X:outdated")}
   build     {:doc  "Build jar"
-             :task (clojure "-T:slim build")}
-  }}
+             :task (clojure "-T:slim build")}}}
