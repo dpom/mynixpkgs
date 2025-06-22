@@ -2,24 +2,31 @@
   cljproj = {
     path = ./cljproj;
     description = ''
-      A template for clojure project
+      A template for clojure projects
+    '';
+  };
+
+  awsproj = {
+    path = ./awsproj;
+    description = ''
+      A template for clojure aws projects
     '';
   };
 
   pyproj = {
     path = ./pyproj;
     description = ''
-      A template for python project
+      A template for python projects
     '';
   };
 
   lpyproj = {
     path = ./lpyproj;
     description = ''
-      A template for basilisp project
+      A template for basilisp projects
     '';
   };
-  
+
   default = {
     path = ./flake;
     description = ''

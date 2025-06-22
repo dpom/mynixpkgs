@@ -1,0 +1,61 @@
+{:paths ["src" "resources"]
+
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+
+        aero/aero                        {:mvn/version "1.1.6"}
+        com.cognitect.aws/iam            {:mvn/version "871.2.30.22"}
+        com.cognitect.aws/s3             ^:antq/exclude {:mvn/version "848.2.1413.0"}
+        com.cognitect.aws/secretsmanager {:mvn/version "871.2.29.35"}
+        com.cognitect.aws/sns            {:mvn/version "871.2.30.11"}
+        com.cognitect.aws/sqs            {:mvn/version "871.2.29.52"}
+        com.cognitect.aws/ssm            {:mvn/version "871.2.31.23"}
+        com.cognitect.aws/sts            {:mvn/version "871.2.29.52"}
+        com.fzakaria/slf4j-timbre        {:mvn/version "0.4.1"}
+        com.taoensso/timbre              {:mvn/version "6.6.1"}
+        integrant/integrant              {:mvn/version "0.13.1"}
+        metosin/malli                    {:mvn/version "0.17.0"}
+        org.slf4j/slf4j-api              {:mvn/version "2.0.16"}}
+
+ :aliases
+ {:dev      {:extra-paths ["dev/src" "dev/resources"]
+             :extra-deps  {integrant/repl      {:mvn/version "0.4.0"}
+                           criterium/criterium {:mvn/version "0.4.6"}}}
+  :nrepl    {:extra-deps
+             {cider/cider-nrepl             {:mvn/version "0.56.0"}
+              refactor-nrepl/refactor-nrepl {:mvn/version "3.10.0"}
+              org.clojure/tools.deps.alpha  {:git/url "https://github.com/clojure/tools.deps.alpha"
+                                             :sha     "5b8909bdb072d66c9f643bae50cd2878a0f694c2"}
+              nrepl/nrepl                   {:mvn/version "1.3.1"}}
+             :main-opts
+             ["-m" "nrepl.cmdline"
+              "--middleware" "[cider.nrepl/cider-middleware refactor-nrepl.middleware/wrap-refactor]"
+              "-i"]}
+  :test     {:extra-paths ["test/src" "test/resources"]
+             :extra-deps
+             {lambdaisland/kaocha         {:mvn/version "1.91.1392"}
+              kaocha-noyoda/kaocha-noyoda {:mvn/version "2019-06-03"}
+              org.clojure/test.check      {:mvn/version "1.1.1"}
+              com.gfredericks/test.chuck  {:mvn/version "0.2.14"}}
+             :jvm-opts    ["-XX:-OmitStackTraceInFastThrow"]
+             :main-opts   ["-m" "kaocha.runner"]
+             :exec-fn     kaocha.runner/exec-fn
+             :exec-args   {:randomize? true
+                           :fail-fast? false}}
+  :cljfmt   {:deps       {io.github.weavejester/cljfmt {:git/tag "0.13.1" :git/sha "7de286008766127128a156275b9add3bf443d7e5"}}
+             :ns-default cljfmt.tool
+             :main-opts  ["-m" "cljfmt.main" "check"]}
+  :outdated {:replace-paths ["."]
+             :replace-deps
+             {com.github.liquidz/antq {:mvn/version "RELEASE"}
+              org.slf4j/slf4j-nop     {:mvn/version "2.0.16"}}
+             :main-opts     ["-m" "antq.core"]
+             :exec-fn       antq.tool/outdated
+             :exec-args     {:directory ["."]       ; default
+                             :exclude   ["org.clojure/tools.deps.alpha"]
+                             :reporter  "table"     ; json edn format
+                             :verbose   false
+                             :upgrade   false
+                             :force     false}}
+  :slim     {:deps       {io.github.abogoyavlensky/slim {:mvn/version "LATEST"}}
+             :ns-default slim.app
+             :exec-args  {:main-ns cljproj.main}}}}

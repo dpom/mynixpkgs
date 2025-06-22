@@ -1,0 +1,34 @@
+{:paths ["src"]
+ :tasks
+ {nrepl     {:doc  "Starts the REPL"
+             :task (clojure "-M:test:dev:nrepl")}
+  aws-login {:doc  "AWS login"
+             :task (shell "aws sso login --profile=stt-development")}
+  vpn-dev   {:doc  "Run vpn for development"
+             :task (shell "awsvpnclient start --config admin/dev.ovpn")}
+  kondo     {:doc  "Runs kondo linter on default or specific file"
+             :task (let [[src-file] *command-line-args*]
+                     (shell (str "clj-kondo --lint "
+                                 (if (empty? src-file)
+                                   "src test"
+                                   src-file))))}
+  style     {:doc  "Checks code style on default or specific file"
+             :task (let [[src-file] *command-line-args*]
+                     (shell (str "cljfmt check "
+                                 (if (empty? src-file)
+                                   "src test resources"
+                                   src-file))))}
+  format    {:doc  "Formats codebase on default or specific file"
+             :task (let [[src-file] *command-line-args*]
+                     (shell  (str "cljfmt fix "
+                                  (if (empty? src-file)
+                                    "src test resources"
+                                    src-file))))}
+  test      {:doc  "Runs tests (using kaocha)"
+             :task (let [[tst-ns] *command-line-args*]
+                     (clojure (str "-M:test"
+                                   (when-not (empty? tst-ns) (str " --focus " tst-ns)))))}
+  libupdate {:doc  "Check for newer libraries"
+             :task (clojure "-X:outdated")}
+  build     {:doc  "Build jar"
+             :task (clojure "-T:slim build")}}}
