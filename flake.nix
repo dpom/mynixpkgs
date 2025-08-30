@@ -17,11 +17,7 @@
       ];
       perSystem =
         {
-          config,
-          self',
-          inputs',
           pkgs,
-          system,
           ...
         }:
         {
@@ -39,6 +35,7 @@
               inherit (pkgs) fetchFromGitHub;
               trivialBuild = pkgs.emacs.pkgs.trivialBuild;
             };
+            rcu = pkgs.callPackage ./pkgs/rcu { };
           };
         };
       flake = {
