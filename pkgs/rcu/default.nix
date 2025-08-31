@@ -20,7 +20,7 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "rcu";
-  version = "4.0.26";
+  version = "4.0.26+202508301907";
 
   format = "other";
 
@@ -28,7 +28,7 @@ python3Packages.buildPythonApplication rec {
     let
       src-tarball = requireFile {
         name = "rcu-${version}-source.tar.gz";
-        hash = "sha256-yY3OFZVHxhVurfjSEeR+UUNHQdpc08jhgaDEvMWRsLA=";
+        hash = "sha256-qnGH6PhCK3vWA4PFltFmIjvVGg80HYA6DOUHPE4Z8Ig=";
         url = "https://www.davisr.me/projects/rcu/";
       };
     in
