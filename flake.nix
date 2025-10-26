@@ -2,7 +2,7 @@
   description = "main flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
@@ -36,6 +36,9 @@
               trivialBuild = pkgs.emacs.pkgs.trivialBuild;
             };
             rcu = pkgs.callPackage ./pkgs/rcu { };
+            ollama = pkgs.callPackage ./pkgs/ollama {
+              inherit (pkgs) fetchFromGitHub cudaPackages buildEnv buildGoModule stdenv;
+            };
           };
         };
       flake = {

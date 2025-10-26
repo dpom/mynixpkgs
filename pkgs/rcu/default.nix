@@ -80,7 +80,7 @@ python3Packages.buildPythonApplication rec {
     pikepdf
     pillow
     python3Packages.protobuf # otherwise it picks up protobuf from function args
-    pyside2
+    pyside6
   ];
 
   desktopItems = [

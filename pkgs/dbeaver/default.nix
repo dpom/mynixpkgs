@@ -3,7 +3,7 @@
   stdenv,
   fetchurl,
   makeWrapper,
-  jdk22,
+  jdk25,
   gnused,
   autoPatchelfHook,
   wrapGAppsHook3,
@@ -13,8 +13,8 @@ stdenv.mkDerivation rec {
   pname = "dbeaver";
   version = "24.2.1";
   hash = "535289c44d4fcd144cbd8c378d2615da7e89ba1cf22f7d257b51de63491fb759";
-  jdk = jdk22;
-  jdk_home = jdk22.home;
+  jdk = jdk25;
+  jdk_home = jdk25.home;
   
   src = fetchurl {
     url = "https://dbeaver.io/files/${version}/dbeaver-ce-${version}-linux.gtk.x86_64-nojdk.tar.gz";
