@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    ollama.url = "path:./pkgs/ollama";
   };
 
   outputs =
@@ -18,6 +19,7 @@
       perSystem =
         {
           pkgs,
+          system,
           ...
         }:
         {
@@ -36,9 +38,7 @@
               trivialBuild = pkgs.emacs.pkgs.trivialBuild;
             };
             rcu = pkgs.callPackage ./pkgs/rcu { };
-            ollama = pkgs.callPackage ./pkgs/ollama {
-              inherit (pkgs) fetchFromGitHub cudaPackages buildEnv buildGoModule stdenv;
-            };
+            ollama-rocm = inputs.ollama.packages.${system}.rocm;
           };
         };
       flake = {

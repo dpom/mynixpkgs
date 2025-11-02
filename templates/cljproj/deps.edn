@@ -19,8 +19,10 @@
               org.clojure/tools.deps.alpha  {:git/url "https://github.com/clojure/tools.deps.alpha"
                                              :sha     "5b8909bdb072d66c9f643bae50cd2878a0f694c2"}
               nrepl/nrepl                   {:mvn/version "1.3.1"}}
+             :jvm-opts ["-Djdk.attach.allowAttachSelf"]
              :main-opts
              ["-m" "nrepl.cmdline"
+              "--port" "7888"
               "--middleware" "[cider.nrepl/cider-middleware refactor-nrepl.middleware/wrap-refactor]"
               "-i"]}
   :test     {:extra-paths ["test/src" "test/resources"]
@@ -34,9 +36,9 @@
              :exec-fn     kaocha.runner/exec-fn
              :exec-args   {:randomize? true
                            :fail-fast? false}}
-  :cljfmt {:deps       {io.github.weavejester/cljfmt {:git/tag "0.13.1" :git/sha "7de286008766127128a156275b9add3bf443d7e5"}}
-           :ns-default cljfmt.tool
-           :main-opts  ["-m" "cljfmt.main" "check"]}
+  :cljfmt   {:deps       {io.github.weavejester/cljfmt {:git/tag "0.13.1" :git/sha "7de286008766127128a156275b9add3bf443d7e5"}}
+             :ns-default cljfmt.tool
+             :main-opts  ["-m" "cljfmt.main" "check"]}
   :outdated {:replace-paths ["."]
              :replace-deps
              {com.github.liquidz/antq {:mvn/version "RELEASE"}
@@ -49,6 +51,12 @@
                              :verbose   false
                              :upgrade   false
                              :force     false}}
+  :mcp      {:deps      {org.slf4j/slf4j-nop     {:mvn/version "2.0.16"} ;; Required for stdio server
+                         com.bhauman/clojure-mcp {:git/url "https://github.com/bhauman/clojure-mcp.git"
+                                                  :git/tag "v0.1.11"
+                                                  :git/sha "65957f8261e8c6162842ec8d19ff398aa4489803"}}
+             :exec-fn   clojure-mcp.main/start-mcp-server
+             :exec-args {:port 7888}}
   :slim     {:deps       {io.github.abogoyavlensky/slim {:mvn/version "LATEST"}}
              :ns-default slim.app
              :exec-args  {:main-ns cljproj.main}}}}

@@ -49,10 +49,63 @@
         "type": "github"
       }
     },
+    "nixpkgs-unfree": {
+      "inputs": {
+        "nixpkgs": [
+          "ollama",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755249704,
+        "narHash": "sha256-J1mqsd/gqZ32G3YOzWk9sppLbXXLEpu37hrZfRcTtdg=",
+        "owner": "numtide",
+        "repo": "nixpkgs-unfree",
+        "rev": "12d82a604d21a65df008bdb1515eecb96f9e55dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nixpkgs-unfree",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1761880412,
+        "narHash": "sha256-QoJjGd4NstnyOG4mm4KXF+weBzA2AH/7gn1Pmpfcb0A=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a7fc11be66bdfb5cdde611ee5ce381c183da8386",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "ollama": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "nixpkgs-unfree": "nixpkgs-unfree"
+      },
+      "locked": {
+        "path": "./pkgs/ollama",
+        "type": "path"
+      },
+      "original": {
+        "path": "./pkgs/ollama",
+        "type": "path"
+      },
+      "parent": []
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "ollama": "ollama"
       }
     }
   },
