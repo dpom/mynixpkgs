@@ -118,7 +118,7 @@ in
 goBuild (finalAttrs: {
   pname = "ollama";
   # don't forget to invalidate all hashes each update
-  version = "0.12.6";
+  version = "0.13.1";
 
   src = fetchFromGitHub {
     owner = "ollama";
