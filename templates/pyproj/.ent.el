@@ -7,15 +7,24 @@
 ;; project settings
 (setq ent-project-home (file-name-directory (if load-file-name load-file-name buffer-file-name)))
 (setq ent-project-name "pyproject")
-(setq ent-clean-regexp "~$")
 
-(task :check '() "check code format" "ruff format --check")
+(ent-load-default-tasks)
 
-(task :format '() "format code" "ruff format")
+(task "check"
+      :doc "Check code format"
+      :action "ruff format --check")
 
-(task :lint '() "lint code" "ruff check")
+(task "format"
+      :doc "Format code"
+      :action "ruff format")
 
-(task :readme '() "build readme file" "pandoc -o README.md tmp/README.org")
+(task "lint"
+      :doc "Lint code"
+      :action "ruff check")
+
+(task "readme"
+      :doc "Build readme file"
+      :action "pandoc -o README.md tmp/README.org")
 
 (provide '.ent)
 ;;; .ent.el ends here

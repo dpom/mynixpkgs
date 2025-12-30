@@ -7,20 +7,32 @@
 ;; project settings
 (setq ent-project-home (file-name-directory (if load-file-name load-file-name buffer-file-name)))
 (setq ent-project-name "cljproj")
-(setq ent-clean-regexp "~$")
 
+(ent-load-default-tasks)
 
-(task :style '() "check code" "bb style")
+(task "style"
+      :doc "Check code"
+      :action "bb style")
 
-(task :format '() "format code" "bb format")
+(task "format"
+      :doc "Format code"
+      :action "bb format")
 
-(task :kondo '() "lint with kondo" "bb kondo")
+(task "kondo"
+      :doc "Lint with kondo"
+      :action "bb kondo")
 
-(task :libupdate '() "search for new libs versions" "bb libupdate" )
+(task "libupdate"
+      :doc "Search for new libs versions"
+      :action "bb libupdate" )
 
-(task :tests '() "run tests" "bb test")
+(task "tests"
+      :doc "Run tests"
+      :action "bb test")
 
-(task :readme '() "build readme file" "pandoc -o README.md tmp/README.org")
+(task "readme"
+      :doc "Build readme file"
+      :action "pandoc -o README.md tmp/README.org")
 
 (provide '.ent)
 ;;; .ent.el ends here

@@ -9,15 +9,28 @@
 (setq ent-project-name "lpyproj")
 (setq ent-clean-regexp "~$")
 
-(task :style '() "check code" "bb style")
+(ent-load-default-tasks)
 
-(task :format '() "format code" "bb format")
 
-(task :kondo '() "lint with kondo" "bb kondo")
+(task "style"
+      :doc "check code"
+      :action "bb style")
 
-(task :tests '() "run tests" "bb test")
+(task "format"
+      :doc "format code"
+      :action "bb format")
 
-(task :readme '() "build readme file" "pandoc -o README.md tmp/README.org")
+(task "kondo"
+      :doc "lint with kondo"
+      :action "bb kondo")
+
+(task "tests"
+      :doc "run tests"
+      :action "bb test")
+
+(task "readme"
+      :doc "build readme file"
+      :action "pandoc -o README.md tmp/README.org")
 
 (provide '.ent)
 ;;; .ent.el ends here
