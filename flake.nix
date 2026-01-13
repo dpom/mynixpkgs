@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    ollama.url = "path:./pkgs/ollama";
   };
 
   outputs =
@@ -33,12 +32,10 @@
                 inherit (pkgs) openvpn;
               };
             };
-            combobulate = pkgs.callPackage ./pkgs/combobulate {
-              inherit (pkgs) fetchFromGitHub;
-              trivialBuild = pkgs.emacs.pkgs.trivialBuild;
-            };
             rcu = pkgs.callPackage ./pkgs/rcu { };
-            ollama-rocm = inputs.ollama.packages.${system}.rocm;
+            ollama = pkgs.callPackage ./pkgs/ollama {
+              inherit (pkgs) ollama;
+            };
           };
         };
       flake = {
