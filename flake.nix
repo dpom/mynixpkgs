@@ -33,9 +33,6 @@
               };
             };
             rcu = pkgs.callPackage ./pkgs/rcu { };
-            ollama = pkgs.callPackage ./pkgs/ollama {
-              inherit (pkgs) ollama;
-            };
           };
         };
       flake = {
